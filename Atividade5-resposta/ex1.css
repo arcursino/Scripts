@@ -1,0 +1,46 @@
+body {
+    font-family: sans-serif;
+    vertical-align: auto;
+    margin: auto;
+}
+
+#navbar {
+    margin: 10px;
+    border-bottom: 3px solid steelblue;
+}
+
+#itens {
+    text-align: left;
+    align-content: flex-end;
+}
+
+h3 {
+    text-align: left;
+    margin-right: 20px;
+    align-content: flex-end;
+}
+
+#menu {
+    text-align: right;
+}
+
+a {
+    padding: 10px;
+    cursor: pointer;
+}
+
+a:hover {
+    border: 1.5px dotted lightgray;
+}
+
+img {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+img:hover {
+    border: 1px solid lightgray;
+    opacity: 1;
+}

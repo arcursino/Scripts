@@ -5,13 +5,18 @@ body {
 }
 
 #navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px;
     border-bottom: 3px solid steelblue;
 }
 
 #itens {
+    display: flex;
     text-align: left;
     align-content: flex-end;
+    align-items: center;
 }
 
 h3 {
@@ -48,19 +53,22 @@ img:hover {
 #corpo {
     margin-top: 30px;
     margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
 }
 
 .um {
     background-color: lightpink;
-    width: 300px;
+    flex: 1 1 300px;
 }
 
 .dois {
     background-color: lightyellow;
-    width: 300px;
+    flex: 1 1 300px;
 }
 
 .tres {
     background-color: lightsalmon;
-    width: 300px;
+    flex: 1 1 300px;
 }

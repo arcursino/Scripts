@@ -5,13 +5,18 @@ body {
 }
 
 #navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 10px;
     border-bottom: 3px solid steelblue;
 }
 
 #itens {
+    display: flex;
     text-align: left;
     align-content: flex-end;
+    align-items: center;
 }
 
 h3 {

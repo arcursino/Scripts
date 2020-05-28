@@ -21,7 +21,7 @@ class App extends React.Component {
     render() {
         return (
             <div> 
-                <Form add={(evento) =>this.adicionar(evento)}/> 
+                <Form add={this.nome}/> 
                 <Tabela  nome={this.nome}/>
             </div>
         );                     

@@ -1,4 +1,5 @@
 --- Lista 1 ---
+https://github.com/arcursino/Scripts/tree/master/Atividade1-resposta
 ex1:
 reverse = (x) => {
     let aux = ""
@@ -47,7 +48,7 @@ console.log(imprime("Ariana"));
 
 
 --- Lista 2 ---
-
+https://github.com/arcursino/Scripts/tree/master/Atividade2-reposta
 ex1:
 const aluno = {
     nome:'Paulo',
@@ -165,7 +166,7 @@ cliente1.print();
 cliente2.print();
 
 --- Lista 3 ---
-
+https://github.com/arcursino/Scripts/tree/master/Atividade3-resposta
 ex1:
 let p = new Promise((x, y) => {
   console.log("Ok")
@@ -232,3 +233,11 @@ random(20).then(
 
 ---- Lista 4 ----
 https://github.com/arcursino/Scripts/tree/master/Atividade4-resposta
+
+
+---- Lista 5 ----
+https://github.com/arcursino/Scripts/tree/master/Atividade5-resposta
+
+
+---- Lista 6 ----
+https://github.com/arcursino/Scripts/tree/master/Atividade6-resposta/atv-react

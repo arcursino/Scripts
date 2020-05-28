@@ -1,0 +1,234 @@
+--- Lista 1 ---
+ex1:
+reverse = (x) => {
+    let aux = ""
+    let inv = ""
+  
+    for (i = x.length - 1; i >= 0; i--) {
+      inv = inv + x[i];
+    }
+  
+    return x;
+  }
+  
+console.log(reverse("Cheguei em Chernobyl"));
+
+
+ex:2
+reverse2 = (x) => {
+    let inv = x.split('').reverse().join('');
+    return inv;
+  }
+  
+console.log(reverse2("Cheguei em Chernobyl"));
+
+
+ex3:
+let inverteString = function(frase) {
+    return frase.split('').reverse().join('');
+}
+
+console.log(inverteString("Cheguei em Chernobyl"));
+
+ex4:
+const a = new Array(10);
+
+a.fill(1);
+
+console.log(a.map(item => item * Math.floor(Math.random()*20)));
+
+
+ex5:
+imprime = (nome) => {
+    return "Bom dia "+nome +"\nBoa tarde "+nome;
+}
+
+console.log(imprime("Ariana"));
+
+
+--- Lista 2 ---
+
+ex1:
+const aluno = {
+    nome:'Paulo',
+    print: function(){
+        console.log(this.nome);
+    }
+}
+
+const professor = {
+    nome:'José',
+    print: () => {
+        console.log(this.nome);
+    }
+}
+
+aluno.print();
+professor.print("Arley");
+
+// Professor deu undefined, pois 'Funções Arrow' não possuem this em seu escopo
+
+
+ex2:
+json = [{
+        "nome" : "Ana Maria",
+        "idiomas" : ["espanhol","francês"],
+        "caracteristicas" : [{"peso" : 62.5},{"altura" : 1.67}]
+    },
+    {
+        "nome" : "Carlos",
+        "idiomas" : ["ingles"],
+        "caracteristicas" : [{"sexo":"M"},{"altura":1.8},{"doador":true}]
+    },
+    {
+        "nome" : "Rodrigo",
+        "idiomas" : ["espanhol","francês","inglês"],
+        "caracteristicas" : [{"desportista" : true},{"voluntario" : true}]
+    }
+]
+
+var associados = json.forEach(element => {
+    console.log(element.associados);
+});
+
+
+ex3:
+json = [{
+    "nome" : "Ana Maria",
+    "idiomas" : ["espanhol","francês"],
+    "caracteristicas" : [{"peso" : 62.5},{"altura" : 1.67}]
+},
+{
+    "nome" : "Carlos",
+    "idiomas" : ["ingles"],
+    "caracteristicas" : [{"sexo":"M"},{"altura":1.8},{"doador":true}]
+},
+{
+    "nome" : "Rodrigo",
+    "idiomas" : ["espanhol","francês","inglês"],
+    "caracteristicas" : [{"desportista" : true},{"voluntario" : true}]
+}
+]
+
+json.forEach(element => {
+    console.log(element.nome);
+    console.log(element.caracteristicas);
+  });
+
+ex4:
+class Pessoa{
+    constructor(nome,idade){
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    print = (nome, idade) => {
+        console.log(this.nome +" "+ this.idade);
+    }
+}
+
+
+const pessoa1 = new Pessoa("Ariana",36);
+const pessoa2 = new Pessoa("Beatriz",20);
+
+pessoa1.print();
+pessoa2.print();
+
+ex5:
+class Pessoa{
+    constructor(nome,idade){
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    print = (nome, idade) => {
+        console.log( this.nome +" "+ this.idade );
+    }
+}
+
+class Cliente extends Pessoa{
+    constructor(nome, idade, telefone){
+        super(nome, idade)
+        this.telefone = telefone;
+    }
+
+    print = (nome, idade, telefone) => {
+        console.log( this.nome +" "+ this.idade + " " + this.telefone);
+    }
+}
+
+const cliente1 = new Cliente("Ariana",36,12981447997);
+const cliente2 = new Cliente("Beatriz",20,1291919191);
+
+
+cliente1.print();
+cliente2.print();
+
+--- Lista 3 ---
+
+ex1:
+let p = new Promise((x, y) => {
+  console.log("Ok")
+});
+
+p.then(
+  () => console.log('Bom dia')
+).catch(
+  () => console.log('Boa tarde')
+).finally(
+  () => console.log('Boa noite')
+);  
+
+ex2:
+let p = new Promise((x, y) => {
+    console.log("Ok")
+    });
+  
+  p.then(
+    () => console.log('Bom dia')
+  ).catch(
+    () => console.log('Boa tarde')
+  ).finally(
+    () => console.log('Boa noite')
+  ); 
+
+function operacao(x){
+return new Promise( (x, y) => {
+});
+}
+
+
+ex3:
+async function aleatorio(min, max) {
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+  
+  async function exibir() {
+    let a = await aleatorio(30, 50);
+    console.log(a);
+  }
+  
+  exibir();
+
+
+ex4:
+const random = async max => Math.floor(Math.random() * max);
+
+random(20).then(
+    resultado => {
+        console.log(resultado)
+    }
+)
+
+
+ex5:
+const random = async max => Math.floor(Math.random() * max);
+
+random(20).then(
+    resultado => {
+        console.log(resultado+resultado)
+    }
+)
+
+---- Lista 4 ----
+https://github.com/arcursino/Scripts/tree/master/Atividade4-resposta

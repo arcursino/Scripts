@@ -23,11 +23,12 @@ export default function Contato() {
         }
 
         try {
-            await api.get(`/contato/:${nome}/:${telefone}`, data, {
+            await api.get(`/contato/${nome}/${telefone}`, data, {
                 headers: {
                     Authorization: idusuario,
                 }
-            })            
+            })    
+            window.location.reload();        
             
             
         }catch (err) {

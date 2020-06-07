@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, matchPath } from 'react-router-dom';
 import { FiArrowLeft, FiPower, FiTrash2, FiRefreshCw } from 'react-icons/fi';
+import Popup from "reactjs-popup";
 
 import api from '../../services/api'
 
@@ -28,11 +29,12 @@ export default function Perfil() {
 
     async function deleteContato(id){
         try {
-            await api.get(`/contato/:${id}`,{
+            await api.get(`/contato/${id}`,{
                 headers: {
                     Authorization: idusuario,
                 }
             });
+            window.location.reload();
                        
 
         } catch (err) {
@@ -49,6 +51,7 @@ export default function Perfil() {
                 
             });
             setContatos(contatos.filter(contato => contato.id !== id)); 
+            window.location.reload();
                         
         } catch (err) {
             alert('Erro ao atualizar, tente novamente');
@@ -72,38 +75,46 @@ export default function Perfil() {
 
     return (
         <div className="content">            
-            <div id="login">
+            <div id="profile">
             <section>                              
-    <h1>Contatos Cadastrados </h1>                
-        <ul>
-        {contatos.map(contato => (
-            <p > 
-            <li key={contato.id}>
+                <h1>Contatos Cadastrados </h1>                
+                <ul>
+                    {contatos.map(contato => (
+                    <p > 
+                    <li key={contato.id}>
                 
                     <strong>Nome:</strong>
                     {contato.nome} <br></br>
                     <strong>Telefone:</strong>
                     {contato.telefone} <br></br>
+
                     <button onClick={() => deleteContato(contato.idcontato)}
                         type="button"> Deleta
                     <FiTrash2 size={20} color="#a8a8b3" />
-                    </button>
-                    <button  onClick={() => atualizaContato(contato.idcontato)}
+                    </button>                    
+                    <Popup trigger={<button onClick={() => atualizaContato(contato.idcontato)}
                         type="button"> Atualiza
-                    <FiRefreshCw size={20} color="#a8a8b3" />
-                    </button>
-            </li>  
-            </p>
-            ))}
-        </ul> <br></br>  
-            <Link className="button" to="/">Logout</Link>
+                        <FiRefreshCw size={20} color="#a8a8b3" />
+                        </button>} position="right center">
+                        <div>
+                        <strong>Nome:</strong>
+                        {contato.nome} <br></br>
+                        <strong>Telefone:</strong>
+                        {contato.telefone} <br></br>
+                        </div>
+                    </Popup>
+                    </li>  
+                    </p>
+                    ))}
+                </ul> <br></br>  
+                <Link className="button" to="/">Logout</Link>
                 <button onClick={Logout} type="button">
                     <FiPower size={18} color="#E02041" />
                 </button><br></br>      
-            <Link className="back-link" to="/">
-                <FiArrowLeft  size={16} color="#066a75"/>
-                    Voltar para home
-            </Link>     
+                <Link className="back-link" to="/contato">
+                    <FiArrowLeft  size={18} color="#066a75"/>
+                        Voltar para Inserir Contatos
+                </Link>     
 
             </section>   
             </div>        

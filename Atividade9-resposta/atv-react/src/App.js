@@ -1,4 +1,11 @@
 import React from 'react';
+import { Box, Container, Grid, TextField, FormControl,
+         InputLabel, Select, Table, MenuItem } from '@material-ui/core';
+
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 
  export default class App extends React.Component {
@@ -139,73 +146,72 @@ import React from 'react';
    
   render() {
     return (
-      <div>
-        <form>
-        <row>
-          <col>
-            <form onSubmit={this.buscaCidades}>              
-              <label>Nome</label>
-              <input
-              type="textArea" 
-              value={this.state.value}
-              onChange={this.buscaCidades}
-              placeholder="Digite pelo menos as 3 primeiras letras"
-              />              
-            </form>
-          </col>
-          <col>
-            <form>
-            <label>Cidades</label>
-            <input type="select" 
+      <Box mt={6}>
+        <Container maxWidth="md">
+          <Grid container spacing={3}>
+            <Grid item sm={6}>
+              <TextField onSubmit={this.buscaCidades}              
+               label="Nome da Cidade"
+               fullWidth={true}              
+               value={this.state.nome}
+               onChange={this.buscaCidades}
+               placeholder="Digite pelo menos as 3 primeiras letras"
+              />
+            </Grid>
+          <Grid  item sm={6}>
+            <FormControl>
+            <InputLabel id="cidades">Cidades</InputLabel>
+            <Select 
+              labelId="cidades"
+              fullWidth={true}
               value={this.state.value}
               onChange={(e) => this.buscaPrevisao(e)}
             > 
-            <>{this.state.cidades}</>         
-            </input>
-            </form>
-          </col>
-          </row>
-          </form>
-        <row>
-          <col>
-          <div className={"table "}>
-          <table>
-            <tr>
-              <th colSpan="5">
-                {this.state.cidade.nome} - {this.state.cidade.uf} ({this.state.cidade.atualizacao})
-              </th>
-            </tr>
-            <tr>
-              <th>Dia</th>
-              {this.state.previsao.map((item, idx) =>
-                <td>{this.formatData(item.dia)}</td>)}
-            </tr>
-            <tr>
-              <th>Condições do Tempo</th>
-              {this.state.previsao.map((item, idx) =>
-                <td>{this.getTempo(item.tempo)}</td>)}
-            </tr>
-            <tr>
-              <th>Temp. máxima</th>
-              {this.state.previsao.map((item, idx) =>
-                <td>{item.maxima}</td>)}
-            </tr>
-            <tr>
-              <th>Temp. mínima</th>
-              {this.state.previsao.map((item, idx) =>
-                <td>{item.minima}</td>)}
-            </tr>
-            <tr>
-              <th>Índice ultravioleta</th>
-              {this.state.previsao.map((item, idx) =>
-                <td>{item.iuv}</td>)}
-            </tr>
-          </table>
-        </div>
-          </col>
-        </row>
-      
-      </div>
+            <MenuItem>{this.state.cidades}</MenuItem>         
+            </Select>
+            </FormControl>
+          </Grid> 
+        </Grid>
+        <Grid item xs={12}>
+          <Table> 
+            <TableHead> 
+              <TableRow>
+                <TableCell colSpan="5">
+                 {this.state.cidade.nome} - {this.state.cidade.uf} ({this.state.cidade.atualizacao})
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody> 
+              <TableRow>
+                <TableCell> Dia </TableCell>
+                {this.state.previsao.map((item) =>
+                <TableCell>{this.formatData(item.dia)}</TableCell>)}
+              </TableRow>
+              <TableRow>
+                <TableCell> Condições do Tempo </TableCell>
+                {this.state.previsao.map((item) =>
+                <TableCell>{this.getTempo(item.tempo)}</TableCell>)}
+              </TableRow>
+              <TableRow>
+                <TableCell> Temp. máxima </TableCell>
+                {this.state.previsao.map((item) =>
+                <TableCell>{item.maxima}</TableCell>)}
+              </TableRow>
+              <TableRow>
+                <TableCell> Temp. mínima </TableCell>
+                {this.state.previsao.map((item) =>
+                <TableCell>{item.minima}</TableCell>)}
+              </TableRow>
+              <TableRow>
+                <TableCell> Índice ultravioleta </TableCell>
+                {this.state.previsao.map((item) =>
+                <TableCell>{item.iuv}</TableCell>)}
+              </TableRow>
+            </TableBody>  
+          </Table>        
+        </Grid> 
+      </Container>
+    </Box>
     )
   }
 }

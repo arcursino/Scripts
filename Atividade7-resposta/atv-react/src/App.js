@@ -1,25 +1,36 @@
 import React from 'react';
-import { Container, Row, Col, Input, Label, Form, FormGroup, } from 'reactstrap';
-
+import {  Input,} from 'reactstrap';
 
  export default class App extends React.Component {
    constructor() {
      super();
-     this.state = {      
-       erro:'',
-       dia: '',       
-       tempo: [],
-       tempMax: [],
-       tempMin: [],
-       indUv: [],
-     }     
-   }
+     this.state = {
+      erro: '',
+      lista: [{
+        id: '',
+        cidade: '',
+        estado: ''
+      }],
+      cidade: {
+        nome: '',
+        uf: '',
+        atualizacao: ''
+      },
+      previsao: [{
+        dia: '',
+        tempo: '',
+        maxima: '',
+        minima: '',
+        iuv: ''
+      }],
+      
+    };
+  }
 
-   formatData = data => {
+  formatData = data => {
     let d = data.split('-');
     return d[2] + '/' + d[1] + '/' + d[0];
    }
-
    
   getTempo = sigla => {
     return {
@@ -73,7 +84,6 @@ import { Container, Row, Col, Input, Label, Form, FormGroup, } from 'reactstrap'
      });
      if (e.target.value.length >=3) {
        let nome = e.target.value.normalize("NFC").replace(/[\u0300.\u036f]/g,"")
-       this.setState({erro: ''});
        fetch(`http://servicos.cptec.inpe.br/XML/listaCidades?city=${nome}`,{ method: "GET" })
       .then(response => response.arrayBuffer())
       .then(buffer => {
@@ -120,114 +130,114 @@ import { Container, Row, Col, Input, Label, Form, FormGroup, } from 'reactstrap'
        let xml = parser.parseFromString(str, "text/xml");
        console.log(xml);
        //obter as tags das previsões:   
-       let dia = xml.getElementsByTagName('dia');                 
-       let tempo = xml.getElementsByTagName('tempo');       
-       let tempMax = xml.getElementsByTagName('maxima');
-       let tempMin = xml.getElementsByTagName('minima');
-       let indUv = xml.getElementsByTagName('iuv');       
+       let cidade = xml.getElementsByTagName('cidade')[0];
+       this.setState({ cidade: {} })
+       this.setState({ previsao: [] })       
        
-       console.log(dia, tempo, tempMax, tempMin, indUv);       
+            
        this.setState({
-         dia: dia,                
-         tempo: tempo,
-         tempMax: tempMax,
-         tempMin: tempMin,
-         indUv: indUv
+         previsao: [],
+         cidade: {} 
         });
-        console.log('1' + dia, tempo)
-     })
-     .catch(erro => {
+
+       for (let i = 3; i < 7; i++) {
+        this.setState(prevState => ({
+          previsao: [
+            ...prevState.previsao,
+            {
+              dia: cidade.childNodes[i].childNodes[0].childNodes[0].nodeValue,
+              tempo: cidade.childNodes[i].childNodes[1].childNodes[0].nodeValue,
+              maxima: cidade.childNodes[i].childNodes[2].childNodes[0].nodeValue,
+              minima: cidade.childNodes[i].childNodes[3].childNodes[0].nodeValue,
+              iuv: cidade.childNodes[i].childNodes[4].childNodes[0].nodeValue
+            }]
+        })
+        )
+      }
+
+      this.setState(prevState => ({
+        cidade: {
+          ...prevState.cidade,
+          nome: cidade.childNodes[0].childNodes[0].nodeValue,
+          uf: cidade.childNodes[1].childNodes[0].nodeValue,
+          atualizacao: cidade.childNodes[2].childNodes[0].nodeValue
+        }
+      })
+      )
+
+    })
+     .catch(erro => {       
        console.log(erro);
-       this.setState({erro: "Problemas de acesso ao servidor"});
+       this.setState({
+        previsao: [],
+        cidade: {} ,
+        erro: "Problemas de acesso ao servidor"});
      })
     }
   }
    
   render() {
     return (
-      <Container className="mt-3">
-        <Row className="ml-1">
-          <Col xs="12" sm="10" md="8" lg="6" xl="5" className="p-0">
-          <Form onSubmit={this.buscaCidades}>  
-          <FormGroup>
-            <Label>Nome</Label>
-            <Input
-             type="textArea" 
-             value={this.state.value}
-             onChange={this.buscaCidades}
-             placeholder="Digite pelo menos as 3 primeiras letras"
-             />
-          </FormGroup>  
-          <FormGroup>
-          <Label>Cidades</Label>
-          <Input type="select" 
+      <div>
+        <div class="w-25">
+        <form>
+          <label for="name"> Nome </label><br></br>
+          <input width="60px"
+            type="textArea" 
+            value={this.state.value}
+            onChange={this.buscaCidades}
+            placeholder="Digite as 3 primeiras letras"></input><br></br><br></br>
+          <label> Cidades </label> <br></br>
+          <Input type="select" class="w-25" 
             value={this.state.value}
             onChange={(e) => this.buscaPrevisao(e)}
-          > 
-          <>{this.state.cidades}</>         
-          </Input>
-          </FormGroup>
-          </Form>
-          </Col>
-        </Row>        
-        <Row>
-          <Col>
-            <table border="1" onSubmit={this.buscaPrevisao}>
-              <thead>
-                <tr>
-                  <th  className="text-center" colSpan="5"> Cidade - UF (dia) </th>                  
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th scope="row">Dia</th>
-                  <th>dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th scope="row">Condições do Tempo</th> 
-                  <th>dia</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th scope="row">Temp. máxima</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th scope="row">Temp. mínima</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th scope="row">Índice ultravioleta</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>              
-            </table>
-          </Col>
-        </Row>
-      
-      </Container>
-    )
+            > 
+            <>{this.state.cidades}</>         
+          </Input><br></br>
+          </form>
+          </div>
+        <table border="1px solid black" border-collapse="collapse">
+          {
+            this.state.value !== '' &&
+            <>
+              <tr>
+                <th text-align="center" colSpan="5">
+                  {this.state.cidade.nome} - {this.state.cidade.uf} ({this.state.cidade.atualizacao})
+                </th>
+              </tr>
+              <tr>
+                <th>Dia</th>
+                {this.state.previsao.map((item) =>
+                  <td>{this.formatData(item.dia)}</td>)}
+              </tr>
+              <tr>
+                <th>Condições do Tempo</th>
+                {this.state.previsao.map((item) =>
+                  <td>{this.getTempo(item.tempo)}</td>)}
+              </tr>
+              <tr>
+                <th>Temp. máxima</th>
+                {this.state.previsao.map((item) =>
+                  <td>{item.maxima}</td>)}
+              </tr>
+              <tr>
+                <th>Temp. mínima</th>
+                {this.state.previsao.map((item) =>
+                  <td>{item.minima}</td>)}
+              </tr>
+              <tr>
+                <th>Índice ultravioleta</th>
+                {this.state.previsao.map((item) =>
+                  <td>{item.iuv}</td>)}
+              </tr>
+              </>
+            }
+            {
+              this.state.erro !== '' &&
+              <td>Mensagem de erro: {this.state.erro}</td>
+            } 
+        </table>
+      </div>    
+    );
   }
 }

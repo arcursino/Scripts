@@ -168,58 +168,40 @@ import React from 'react';
           </form>
         <row>
           <col>
-            <table onSubmit={this.buscaPrevisao}>
-              <thead>
-                <tr>
-                  <th  colspan="5"> Cidade - UF (dia) </th>                  
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th>Dia</th>
-                  <th>{console.log("Aqui")}</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th>Condições do Tempo</th> 
-                  <th>dia</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th>Temp. máxima</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th>Temp. mínima</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>
-              <thead>
-                <tr>
-                  <th>Índice ultravioleta</th> 
-                  <th>Dia1</th> 
-                  <th>Dia2</th> 
-                  <th>Dia3</th>  
-                  <th>Dia4</th>                 
-                </tr>
-              </thead>              
-            </table>
+          <div className={"table "}>
+          <table>
+            <tr>
+              <th colSpan="5">
+                {this.state.cidade.nome} - {this.state.cidade.uf} ({this.state.cidade.atualizacao})
+              </th>
+            </tr>
+            <tr>
+              <th>Dia</th>
+              {this.state.previsao.map((item, idx) =>
+                <td>{this.formatData(item.dia)}</td>)}
+            </tr>
+            <tr>
+              <th>Condições do Tempo</th>
+              {this.state.previsao.map((item, idx) =>
+                <td>{this.getTempo(item.tempo)}</td>)}
+            </tr>
+            <tr>
+              <th>Temp. máxima</th>
+              {this.state.previsao.map((item, idx) =>
+                <td>{item.maxima}</td>)}
+            </tr>
+            <tr>
+              <th>Temp. mínima</th>
+              {this.state.previsao.map((item, idx) =>
+                <td>{item.minima}</td>)}
+            </tr>
+            <tr>
+              <th>Índice ultravioleta</th>
+              {this.state.previsao.map((item, idx) =>
+                <td>{item.iuv}</td>)}
+            </tr>
+          </table>
+        </div>
           </col>
         </row>
       

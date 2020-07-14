@@ -50,13 +50,13 @@ export default function Login () {
     
     return (
         <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
-            <img src={logo} alt="Logo" style={{width: 200, height: 160, marginTop:30}} resizeMode="contain"/>
-            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, alignItems:"center", marginBottom:20}} resizeMode="contain"/>             
-            <Col xs='11' sm='9' md='6' lg='5' xl='3'>                
+            <Col xs='8' sm='6' md='4' lg='4' xl='3'> 
+                <img src={logo} alt="Logo" style={{width: 200, height: 160, marginTop:30, marginLeft:50}}/>
+                <img src={text1} alt="Texto 1" style={{width: 280, height: 50, marginBottom:20, marginLeft:5}} />                            
                 <Form onSubmit={enviar}>
                     <FormGroup>
                         <Label for="mail">Email</Label>
-                        <Input
+                        <Input 
                             type="email"
                             placeholder="e-mail de login"
                             value={mail}
@@ -73,7 +73,7 @@ export default function Login () {
                             minLength="6" maxLength="10"
                             required />
                     </FormGroup>
-                    <Button color="success" style={{width: 380, height: 40, marginBottom:10}}>Entrar</Button>
+                    <Button color="success" style={{width: 350, height: 40, marginBottom:10}}>Entrar</Button>
                     {
                         message !== '' &&
                         <Alert color="danger" className="mt-3">{message}</Alert>
@@ -84,11 +84,13 @@ export default function Login () {
                     }
                     {
                         logado  && <Redirect to="/dados" />
-                    }  
+                    } 
+                    <Row style={{marginLeft:5}}> 
                     <Link className="back-link" to="/cadastro">
                         <FiLogIn size={16} color="#009e73"/>
                         Nao tenho cadastro
-                    </Link>                  
+                    </Link> 
+                    </Row>                 
                 </Form>
             </Col>
         </Row>

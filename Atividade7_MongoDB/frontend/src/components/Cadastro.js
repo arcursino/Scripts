@@ -50,8 +50,8 @@ export default function Cadastro () {
   
     return (
         <Row className="justify-content-center">
-            <img src={logo} alt="Logo" style={{width: 180, height: 140, marginTop:20}} resizeMode="contain"/>
-            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, marginBottom:20}} resizeMode="contain"/>  
+            <img src={logo} alt="Logo" style={{width: 180, height: 140, marginTop:30, marginLeft:50}}/>
+            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, marginBottom:20, marginLeft:5}} />  
             <Col xs='11' sm='9' md='6' lg='5' xl='4'>
                 <Form className='mt-2' onSubmit={enviar} >
                         <FormGroup>
@@ -83,7 +83,7 @@ export default function Cadastro () {
                             minLength="6" maxLength="10"
                             required />
                     </FormGroup>
-                    <Button color="success" style={{width: 380, height: 40, marginBottom:5}}>Cadastrar</Button>
+                    <Button color="success" style={{width: 420, height: 40, marginBottom:10}}>Cadastrar</Button>
                     {
                         erro !== '' && 
                         <Alert color="danger" className="mt-3"> {erro} </Alert>
@@ -92,10 +92,12 @@ export default function Cadastro () {
                         msg !== '' &&
                         <Alert color="success" className="mt-3">{msg}</Alert>
                     }
-                    <Link className="back-link" to="/login">
-                        <FiLogIn size={16} color="#009e73"/>
-                        Já tenho Cadastro
-                    </Link> 
+                    <Row style={{marginLeft:5}}>
+                        <Link className="back-link" to="/login">
+                            <FiLogIn size={16} color="#009e73"/>
+                            Já tenho Cadastro
+                        </Link> 
+                    </Row>
                 </Form>
             </Col>
         </Row>

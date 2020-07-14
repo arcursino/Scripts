@@ -143,13 +143,16 @@ export default function Dados() {
 
     return (
         <Row className="justify-content-center mt-3">
-            <Row className="justify-content-space-between display-flex">
-            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, marginBottom:10}} resizeMode="contain"/>
-            </Row>
-            <Link className="back-link " to="/login">
-                    <IoMdLogOut size={16} color="#E02041"/>
-                        
-            </Link>
+            <Col xs="auto" >
+                <img src={text1} alt="Texto 1" style={{width: 260, height: 40, marginTop:5, marginBottom:10, marginLeft:80}} />
+            </Col>
+            <Col xs="auto">
+                <Link className="back-link mr-50" to="/login" style={{marginRight:10, marginTop:5}}>
+                        <IoMdLogOut size={16} color="#E02041"/>
+                            
+                </Link>
+            </Col> 
+        
         <Form>
             {message !== '' &&
                 <Row className="justify-content-center mt-3">

@@ -11,6 +11,12 @@ import {
     Alert
 } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
+import { FiLogIn } from 'react-icons/fi';
+
+import text1 from '../static/text1.png';
+import logo from '../static/logo.PNG';
+
 export default function Cadastro () {
     const [mail, setMail] = useState('')
     const [senha, setSenha] = useState('')    
@@ -44,8 +50,10 @@ export default function Cadastro () {
   
     return (
         <Row className="justify-content-center">
+            <img src={logo} alt="Logo" style={{width: 180, height: 140, marginTop:20}} resizeMode="contain"/>
+            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, marginBottom:20}} resizeMode="contain"/>  
             <Col xs='11' sm='9' md='6' lg='5' xl='4'>
-                <Form className='mt-5' onSubmit={this.enviar} >
+                <Form className='mt-2' onSubmit={enviar} >
                         <FormGroup>
                         <Label>Email de cadastro</Label>
                         <Input
@@ -75,7 +83,7 @@ export default function Cadastro () {
                             minLength="6" maxLength="10"
                             required />
                     </FormGroup>
-                    <Button>Enviar</Button>
+                    <Button color="success" style={{width: 380, height: 40, marginBottom:5}}>Cadastrar</Button>
                     {
                         erro !== '' && 
                         <Alert color="danger" className="mt-3"> {erro} </Alert>
@@ -84,6 +92,10 @@ export default function Cadastro () {
                         msg !== '' &&
                         <Alert color="success" className="mt-3">{msg}</Alert>
                     }
+                    <Link className="back-link" to="/login">
+                        <FiLogIn size={16} color="#009e73"/>
+                        Já tenho Cadastro
+                    </Link> 
                 </Form>
             </Col>
         </Row>

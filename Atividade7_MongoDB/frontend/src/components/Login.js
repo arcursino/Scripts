@@ -8,9 +8,14 @@ import {
     Button,
     Row,
     Col,
-    Alert
+    Alert,
 } from 'reactstrap';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
+import { FiLogIn } from 'react-icons/fi';
+
+import text1 from '../static/text1.png';
+import logo from '../static/logo.PNG';
+
 
 export default function Login () {
     const [mail, setMail] = useState('')
@@ -44,8 +49,10 @@ export default function Login () {
     }
     
     return (
-        <Row className="justify-content-center mt-5">
-            <Col xs='11' sm='9' md='6' lg='5' xl='3'>
+        <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
+            <img src={logo} alt="Logo" style={{width: 200, height: 160, marginTop:30}} resizeMode="contain"/>
+            <img src={text1} alt="Texto 1" style={{width: 280, height: 50, alignItems:"center", marginBottom:20}} resizeMode="contain"/>             
+            <Col xs='11' sm='9' md='6' lg='5' xl='3'>                
                 <Form onSubmit={enviar}>
                     <FormGroup>
                         <Label for="mail">Email</Label>
@@ -66,7 +73,7 @@ export default function Login () {
                             minLength="6" maxLength="10"
                             required />
                     </FormGroup>
-                    <Button>Enviar</Button>
+                    <Button color="success" style={{width: 380, height: 40, marginBottom:10}}>Entrar</Button>
                     {
                         message !== '' &&
                         <Alert color="danger" className="mt-3">{message}</Alert>
@@ -77,7 +84,11 @@ export default function Login () {
                     }
                     {
                         logado  && <Redirect to="/dados" />
-                    }
+                    }  
+                    <Link className="back-link" to="/cadastro">
+                        <FiLogIn size={16} color="#009e73"/>
+                        Nao tenho cadastro
+                    </Link>                  
                 </Form>
             </Col>
         </Row>

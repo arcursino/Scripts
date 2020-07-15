@@ -5,6 +5,9 @@ import {
     Col,
 } from 'reactstrap';
 
+import { Link } from 'react-router-dom';
+import { FiLogIn } from 'react-icons/fi';
+
 
 export default function Logout() {
     const [result, setResult] = useState('Efetuando o logout')
@@ -37,6 +40,12 @@ export default function Logout() {
                 { 
                     result !== ''&& <p style={{textAlign:'center', color:'red'}}>{message}</p>
                 }
+                <Row style={{marginLeft:5}}>
+                    <Link className="back-link" to="/login">
+                        <FiLogIn className='mr-2' size={20} color="#009e73"/>
+                        Voltar para Home
+                    </Link> 
+                </Row>
             </Col>
         </Row>
     )    

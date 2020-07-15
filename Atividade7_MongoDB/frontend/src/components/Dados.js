@@ -102,7 +102,7 @@ export default function Dados() {
         api.post('/listByInterval', { syear, smonth, sday, eyear, emonth, eday })
             .then(res => {
                 if (res.data.ganhos || res.data.gastos) {
-                    const ganhos = res.data.ganhos.map(ganho =>
+                    const ganhos = res.data.ganhos.map(ganho =>                        
                         <option key={ganho._id} {...ganho} onClick={()=>deletar(ganho._id,'ganho')}>
                             {ganho.descricao} {moneyFormat(ganho.valor)} {dateTimeFormat(ganho.data)}
                             <Link className="delete" to="/deleteganho" />
@@ -150,29 +150,28 @@ export default function Dados() {
                 <img src={text1} alt="Texto 1" style={{width: 260, height: 40, marginTop:5, marginBottom:10, marginLeft:80}} />
             </Col>
             <Col xs="auto">
-                <Link className="back-link mr-50" to="/login" style={{marginRight:10, marginTop:5}}>
+                <Link className="back-link mr-50" to="/logout" style={{marginRight:10, marginTop:5}}>
                         <IoMdLogOut size={20} color="#E02041"/>
                             
                 </Link>
-            </Col> 
-        
+            </Col>         
         <Form>
             {message !== '' &&
                 <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
-                    <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                    <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                         <Alert color="danger">{message}</Alert>
                     </Col>
                 </Row>
             }
             {result !== '' &&
                 <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
-                    <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                    <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                         <Alert color="success">{result}</Alert>
                     </Col>
                 </Row>
             }
             <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
-                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="descricao">Descrição</Label>
                         <Input
@@ -219,7 +218,7 @@ export default function Dados() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="ganhos">Ganhos</Label>
                         <Input type="select" id="ganhos" style={{ height: '200px' }} multiple>
@@ -230,7 +229,7 @@ export default function Dados() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="gastos">Gastos</Label>
                         <Input type="select" id="gastos" style={{ height: '200px' }} multiple>
@@ -240,7 +239,7 @@ export default function Dados() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
+                <Col xs='12' sm='8' md='4' lg='4' xl='3'>
                     <FormGroup style={{height:'300px'}}>
                         <Grafico startDate={startDate} endDate={endDate} series={series} />
                     </FormGroup>

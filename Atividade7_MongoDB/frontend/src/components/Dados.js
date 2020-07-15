@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-    Alert, Row, Col, Form, FormGroup, Label, Input, Button, CardImg
+    Alert, Row, Col, Form, FormGroup, Label, Input, Button, CardImg, InputGroup
 } from 'reactstrap';
 import api from './api'
 import {moneyFormat, dateFormat, dateTimeFormat, groupDadosByDate} from './operations'
@@ -11,13 +11,12 @@ import * as locales from 'react-date-range/dist/locale';
 import { confirmAlert } from 'react-confirm-alert'; // https://www.npmjs.com/package/react-confirm-alert
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-import { GiReceiveMoney, GiPayMoney, GiCalendar } from 'react-icons/gi';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { IoMdLogOut, IoIosReturnRight } from 'react-icons/io';
+import { GiReceiveMoney, GiPayMoney, GiCalendar } from 'react-icons/gi';
+import { IoMdLogOut, IoMdTrash } from 'react-icons/io';
 
 import text1 from '../static/text1.png';
-import logo from '../static/logo.PNG';
 
 export default function Dados() {
     const [ganhos, setGanhos] = useState([])
@@ -106,7 +105,9 @@ export default function Dados() {
                     const ganhos = res.data.ganhos.map(ganho =>
                         <option key={ganho._id} {...ganho} onClick={()=>deletar(ganho._id,'ganho')}>
                             {ganho.descricao} {moneyFormat(ganho.valor)} {dateTimeFormat(ganho.data)}
-                        </option>
+                            <Link className="delete" to="/deleteganho" />
+                            <IoMdTrash size={16} color="#009e73"/>                                                      
+                        </option>   
                     )
                     const gastos = res.data.gastos.map(gasto =>
                         <option key={gasto._id} {...gasto} onClick={()=>deletar(gasto._id,'gasto')}>
@@ -142,7 +143,7 @@ export default function Dados() {
 
 
     return (
-        <Row className="justify-content-center mt-3">
+        <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
             <Col xs="auto" >
                 <img src={text1} alt="Texto 1" style={{width: 260, height: 40, marginTop:5, marginBottom:10, marginLeft:80}} />
             </Col>
@@ -155,21 +156,21 @@ export default function Dados() {
         
         <Form>
             {message !== '' &&
-                <Row className="justify-content-center mt-3">
-                    <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+                <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
+                    <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                         <Alert color="danger">{message}</Alert>
                     </Col>
                 </Row>
             }
             {result !== '' &&
-                <Row className="justify-content-center mt-3">
-                    <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+                <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
+                    <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                         <Alert color="success">{result}</Alert>
                     </Col>
                 </Row>
             }
-            <Row className="justify-content-center mt-3">
-                <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+            <Row className="justify-content-center mt-2" style={{marginTop:0, paddingTop:0}}>
+                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="descricao">Descrição</Label>
                         <Input
@@ -191,7 +192,7 @@ export default function Dados() {
                     <FormGroup>
                         <GiReceiveMoney className='mr-2 ml-2' color="#009e73" onClick={add.bind(this, 'ganho')}/> 
                             Adicionar Ganho
-                        <GiPayMoney className='mr-2 ml-5' color="#E02041" onClick={add.bind(this, 'gasto')}/> 
+                        <GiPayMoney className='mr-2 ml-2' color="#E02041" onClick={add.bind(this, 'gasto')}/> 
                             Adicionar Gasto
                         <GiCalendar className='mr-3 ml-4' color="#1a1aff" onClick={() => setShowDatePicker(!showDatePicker)}>                            
                              {showDatePicker ? 'Esconder Calendário' : 'Exibir Calendário'}
@@ -216,17 +217,18 @@ export default function Dados() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="ganhos">Ganhos</Label>
                         <Input type="select" id="ganhos" style={{ height: '200px' }} multiple>
-                            {ganhos}
+                            {ganhos}                          
                         </Input>
+                        
                     </FormGroup>
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                     <FormGroup>
                         <Label for="gastos">Gastos</Label>
                         <Input type="select" id="gastos" style={{ height: '200px' }} multiple>
@@ -236,7 +238,7 @@ export default function Dados() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-                <Col xs='12' sm='10' md='7' lg='6' xl='5'>
+                <Col xs='8' sm='6' md='4' lg='4' xl='3'>
                     <FormGroup style={{height:'300px'}}>
                         <Grafico startDate={startDate} endDate={endDate} series={series} />
                     </FormGroup>

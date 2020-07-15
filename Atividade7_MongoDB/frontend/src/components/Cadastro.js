@@ -22,7 +22,7 @@ export default function Cadastro () {
     const [senha, setSenha] = useState('')    
     const [confirmacao, setConfirmacao] = useState('')
     const [erro, setErro] = useState('')
-    const [msg, setMsg] = useState('')  
+    const [msg, setMsg] = useState('') 
 
     const enviar = (e) => {
         e.preventDefault();
@@ -91,11 +91,11 @@ export default function Cadastro () {
                 {
                     msg !== '' &&
                     <Alert color="success" className="mt-3">{msg}</Alert>
-                }
+                }               
                 <Row style={{marginLeft:5}}>
                     <Link className="back-link" to="/login">
-                        <FiLogIn size={16} color="#009e73"/>
-                        Já tenho Cadastro
+                        <FiLogIn className='mr-2' size={20} color="#009e73"/>
+                        Voltar para Home
                     </Link> 
                 </Row>
             </Form>

@@ -112,6 +112,8 @@ export default function Dados() {
                     const gastos = res.data.gastos.map(gasto =>
                         <option key={gasto._id} {...gasto} onClick={()=>deletar(gasto._id,'gasto')}>
                             {gasto.descricao} {moneyFormat(gasto.valor)} {dateTimeFormat(gasto.data)}
+                            <Link className="delete" to="/deletegasto" />
+                            <IoMdTrash size={16} color="#009e73"/>
                         </option>
                     )
                     setGanhos(ganhos)
@@ -149,7 +151,7 @@ export default function Dados() {
             </Col>
             <Col xs="auto">
                 <Link className="back-link mr-50" to="/login" style={{marginRight:10, marginTop:5}}>
-                        <IoMdLogOut size={16} color="#E02041"/>
+                        <IoMdLogOut size={20} color="#E02041"/>
                             
                 </Link>
             </Col> 
@@ -190,11 +192,11 @@ export default function Dados() {
                             onChange={e => setValor(e.target.value)} />
                     </FormGroup>
                     <FormGroup>
-                        <GiReceiveMoney className='mr-2 ml-2' color="#009e73" onClick={add.bind(this, 'ganho')}/> 
+                        <GiReceiveMoney className='mr-2 ml-2'size={20} color="#009e73" onClick={add.bind(this, 'ganho')}/> 
                             Adicionar Ganho
-                        <GiPayMoney className='mr-2 ml-2' color="#E02041" onClick={add.bind(this, 'gasto')}/> 
+                        <GiPayMoney className='mr-2 ml-2' size={20} color="#E02041" onClick={add.bind(this, 'gasto')}/> 
                             Adicionar Gasto
-                        <GiCalendar className='mr-3 ml-4' color="#1a1aff" onClick={() => setShowDatePicker(!showDatePicker)}>                            
+                        <GiCalendar className='mr-2 ml-2' size={20} color="#1a1aff" onClick={() => setShowDatePicker(!showDatePicker)}>                            
                              {showDatePicker ? 'Esconder Calendário' : 'Exibir Calendário'}
                         </GiCalendar>                        
                     </FormGroup>

@@ -160,10 +160,10 @@ const deleteGanho = (req, res) => {
                         }
                     }
                 )
-                if (obj.n == 1 && obj.nModified == 1)
+                if (obj.n == 1)
                     res.send({ result: 'Ganho excluído com sucesso' });
-                else if (obj.n == 1 && obj.nModified == 0)
-                    res.send({ message: 'O ganho já tinha sido excluído' });
+                //else if (obj.n == 1 && obj.nModified == 0)
+                    //res.send({ message: 'O ganho já tinha sido excluído' });
                 else
                     res.send({ message: 'Problemas para excluir o ganho' });
             }

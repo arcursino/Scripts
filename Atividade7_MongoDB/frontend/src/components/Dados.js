@@ -103,10 +103,10 @@ export default function Dados() {
             .then(res => {
                 if (res.data.ganhos || res.data.gastos) {
                     const ganhos = res.data.ganhos.map(ganho =>                        
-                        <option key={ganho._id} {...ganho} onClick={()=>deletar(ganho._id,'ganho')}>
+                        <option key={ganho._id} {...ganho} onClick={()=>{console.log(ganho._id);deletar(ganho._id,'ganho')}}>
                             {ganho.descricao} {moneyFormat(ganho.valor)} {dateTimeFormat(ganho.data)}
                             <Link className="delete" to="/deleteganho" />
-                            <IoMdTrash size={16} color="#009e73"/>                                                      
+                    {/*<IoMdTrash size={16} color="#009e73"/>*/}                                                
                         </option>   
                     )
                     const gastos = res.data.gastos.map(gasto =>

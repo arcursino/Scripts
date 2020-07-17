@@ -83,7 +83,7 @@ export default function Cadastro () {
                         minLength="6" maxLength="10"
                         required />
                 </FormGroup>
-                <Button color="success" style={{width: 370, height: 40, marginBottom:10}}>Cadastrar</Button>
+                <Button color="success" style={{width: 310, height: 40, marginBottom:10}}>Cadastrar</Button>
                 {
                     erro !== '' && 
                     <Alert color="danger" className="mt-3"> {erro} </Alert>
